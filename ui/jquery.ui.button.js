@@ -53,6 +53,7 @@ $.widget( "ui.button", {
 		}
 	},
 	_create: function() {
+		this._document = this.element.get(0).ownerDocument || document;
 		this.element.closest( "form" )
 			.unbind( "reset.button" )
 			.bind( "reset.button", formResetHandler );
@@ -319,7 +320,7 @@ $.widget( "ui.button", {
 			return;
 		}
 		var buttonElement = this.buttonElement.removeClass( typeClasses ),
-			buttonText = $( "<span></span>" )
+			buttonText = $( "<span></span>", this._document )
 				.addClass( "ui-button-text" )
 				.html( this.options.label )
 				.appendTo( buttonElement.empty() )
